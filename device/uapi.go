@@ -130,8 +130,8 @@ func (device *Device) IpcSetOperation(r io.Reader) (err error) {
 	for scanner.Scan() {
 		line := scanner.Text()
 		if line == "" {
-			// Blank line ends parsing.
-			// TODO: Should it? Perhaps this should be a continue instead.
+			// The configuration protocol specifies that set operations are terminated by a blank line.
+			// See https://www.wireguard.com/xplatform/#configuration-protocol.
 			return nil
 		}
 		parts := strings.Split(line, "=")
